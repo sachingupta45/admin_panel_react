@@ -84,7 +84,7 @@ const LoginPage = () => {
                         <Crown size={32} />
                     </Box>
                     <Typography variant="h4" sx={{ fontWeight: 800, color: '#1e293b', letterSpacing: '-1px' }}>
-                        Nexus Admin
+                        Cricket MP Admin
                     </Typography>
                     <Typography variant="body2" sx={{ color: '#64748b', mt: 1, fontWeight: 500 }}>
                         Welcome back! Please enter your details.
@@ -165,7 +165,7 @@ const LoginPage = () => {
 
                 <Box sx={{ mt: 4, textAlign: 'center' }}>
                     <Typography variant="body2" sx={{ color: '#94a3b8', fontWeight: 500 }}>
-                        Powered by Antigravity Design System
+                        Powered by ShineDezign
                     </Typography>
                 </Box>
             </Paper>

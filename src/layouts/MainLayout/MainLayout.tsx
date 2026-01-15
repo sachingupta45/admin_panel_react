@@ -41,7 +41,7 @@ const MainLayout = () => {
                         borderTop: '1px solid #f1f5f9'
                     }}
                 >
-                    © 2026 Cricket Fitness Ltd. Crafted with passion for high performance.
+                    © copyright {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}
                 </Box>
             </Box>
         </Box>

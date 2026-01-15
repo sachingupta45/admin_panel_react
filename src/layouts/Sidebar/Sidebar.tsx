@@ -8,6 +8,7 @@ import {
     ListItemText,
     Typography,
 } from '@mui/material';
+
 import {
     LayoutDashboard,
     Utensils,
@@ -45,8 +46,10 @@ const Sidebar = () => {
             ]
         }
     ];
-
-    const isActive = (path?: string) => path ? location.pathname === path : false;
+    const isActive = (path?: string) => {
+        if (!path) return false;
+        return location.pathname === path || location.pathname.startsWith(`${path}/`);
+    };
 
     return (
         <Box
@@ -81,7 +84,7 @@ const Sidebar = () => {
                     <Crown size={24} />
                 </Box>
                 <Typography variant="h6" sx={{ fontWeight: 800, color: '#1e293b', letterSpacing: '-0.5px' }}>
-                    Nexus Admin
+                    CMP Admin
                 </Typography>
             </Box>
 

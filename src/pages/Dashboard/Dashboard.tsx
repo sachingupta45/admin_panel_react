@@ -39,7 +39,7 @@ const Dashboard = () => {
             title: 'System Administration',
             subtitle: 'Manage platform users and permissions',
             items: [
-                { name: 'User Management', path: '/users', desc: 'View, edit, or delete platform users' },
+                { name: 'User Management', path: '/users', desc: 'View or delete platform users' },
             ]
         }
     ];
