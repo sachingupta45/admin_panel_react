@@ -127,7 +127,26 @@ const DataTable: React.FC<DataTableProps> = ({
                 />
             </Box>
 
-            <TableContainer component={Paper} sx={{ border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', overflow: 'hidden' }}>
+            <TableContainer
+                component={Paper}
+                sx={{
+                    border: 'none',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                    overflowX: 'auto',
+                    maxWidth: '100%',
+                    '&::-webkit-scrollbar': {
+                        height: 6,
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        bgcolor: '#f1f5f9',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        bgcolor: '#cbd5e0',
+                        borderRadius: 3,
+                        '&:hover': { bgcolor: '#94a3b8' }
+                    },
+                }}
+            >
                 <Table sx={{ minWidth: 650 }}>
                     <TableHead sx={{ bgcolor: '#f8fafc' }}>
                         <TableRow>

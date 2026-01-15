@@ -16,7 +16,11 @@ import { Menu as MenuIcon, LogOut, User, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLocation } from 'react-router-dom';
 
-const Header = () => {
+interface HeaderProps {
+    onMenuClick: () => void;
+}
+
+const Header = ({ onMenuClick }: HeaderProps) => {
     const { user, logout } = useAuth();
     const location = useLocation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -52,7 +56,8 @@ const Header = () => {
                     edge="start"
                     color="inherit"
                     aria-label="menu"
-                    sx={{ color: '#2d3748', mr: 2 }}
+                    onClick={onMenuClick}
+                    sx={{ color: '#2d3748', mr: 2, display: { sm: 'none' } }}
                 >
                     <MenuIcon size={20} />
                 </IconButton>

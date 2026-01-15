@@ -1,4 +1,3 @@
-
 import {
     Box,
     List,
@@ -7,6 +6,7 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
+    Drawer,
 } from '@mui/material';
 
 import {
@@ -19,7 +19,14 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Sidebar = () => {
+const drawerWidth = 280;
+
+interface SidebarProps {
+    open: boolean;
+    onClose: () => void;
+}
+
+const Sidebar = ({ open, onClose }: SidebarProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -46,26 +53,19 @@ const Sidebar = () => {
             ]
         }
     ];
+
     const isActive = (path?: string) => {
         if (!path) return false;
         return location.pathname === path || location.pathname.startsWith(`${path}/`);
     };
 
-    return (
-        <Box
-            sx={{
-                width: 280,
-                height: '100vh',
-                bgcolor: '#ffffff',
-                borderRight: '1px solid #e2e8f0',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'fixed',
-                left: 0,
-                top: 0,
-                zIndex: 1200,
-            }}
-        >
+    const handleItemClick = (path: string) => {
+        navigate(path);
+        onClose(); // Close mobile drawer on navigation
+    };
+
+    const drawerContent = (
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             {/* Brand */}
             <Box sx={{ p: 4, display: 'flex', alignItems: 'center', gap: 2 }}>
                 <Box
@@ -111,7 +111,7 @@ const Sidebar = () => {
                                     {item.items?.map((subItem) => (
                                         <ListItem key={subItem.path} disablePadding sx={{ mt: 0.5 }}>
                                             <ListItemButton
-                                                onClick={() => navigate(subItem.path)}
+                                                onClick={() => handleItemClick(subItem.path)}
                                                 sx={{
                                                     borderRadius: '10px',
                                                     color: isActive(subItem.path) ? '#4f46e5' : '#64748b',
@@ -147,7 +147,7 @@ const Sidebar = () => {
                     return (
                         <ListItem key={item.path} disablePadding sx={{ mt: 1 }}>
                             <ListItemButton
-                                onClick={() => item.path && navigate(item.path)}
+                                onClick={() => item.path && handleItemClick(item.path)}
                                 sx={{
                                     borderRadius: '10px',
                                     color: isActive(item.path) ? '#4f46e5' : '#64748b',
@@ -177,6 +177,40 @@ const Sidebar = () => {
                     );
                 })}
             </List>
+        </Box>
+    );
+
+    return (
+        <Box
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
+        >
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Drawer
+                variant="temporary"
+                open={open}
+                onClose={onClose}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                    display: { xs: 'block', sm: 'none' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderRight: '1px solid #e2e8f0' },
+                }}
+            >
+                {drawerContent}
+            </Drawer>
+            <Drawer
+                variant="permanent"
+                sx={{
+                    display: { xs: 'none', sm: 'block' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderRight: '1px solid #e2e8f0' },
+                }}
+                open
+            >
+                {drawerContent}
+            </Drawer>
         </Box>
     );
 };
